@@ -25,7 +25,7 @@ const App: React.FC = () => {
       words: [
         { text: 'স্বাগতম' },
         { text: 'আপনার', className: 'text-blue-500 dark:text-blue-500' },
-        { text: 'Rider এ।' },
+        { text: 'রাইডার এ।' },
       ],
       placeholders: {
         startLocation: 'শুরু স্থান',
@@ -52,7 +52,7 @@ const App: React.FC = () => {
   return (
     <>
       {!language && <LanguagePopup onSelectLanguage={handleLanguageChange} />}
-      <div className="flex flex-col items-center min-h-screen px-4 sm:px-8" style={{ backgroundImage: "url('/map2.jpg')"}}>
+      <div className="flex flex-col items-center min-h-screen px-4 sm:px-8" style={{ backgroundImage: "url('/map4.jpg')"}}>
         <div className="mt-10">
             {language && (
               <TypewriterEffectSmooth
@@ -60,7 +60,7 @@ const App: React.FC = () => {
                 className="text-center text-3xl font-semibold text-gray-800"
               />
             )}
-          <div className="w-full max-w-4xl bg-gray-100 shadow-2xl rounded-lg p-8 space-y-8">
+          <div className="w-full max-w-4xl border border-stone-400 bg-gray-100 shadow-2xl rounded-lg p-8 space-y-8">
             <form className="flex flex-wrap gap-6 items-center justify-between">
               <input
                 type="text"
