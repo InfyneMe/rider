@@ -124,65 +124,69 @@ const App: React.FC = () => {
               className="text-center text-3xl font-semibold text-gray-800"
             />
           )}
-          <div className="w-full max-w-4xl border border-stone-400 bg-gray-100 shadow-2xl rounded-lg p-8">
-            <div className="relative flex flex-wrap gap-2 items-center justify-between">
-              {/* Start Location */}
-              <div className="relative flex-1">
-                <input
-                  id="startFrom"
-                  type="text"
-                  value={startFrom}
-                  onChange={handleStartForm}
-                  placeholder={currentTranslations.placeholders.startLocation}
-                  className="w-[10rem] px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                {startSuggestions.length > 0 && (
-                  <ul className="absolute left-0 top-full z-10 w-full bg-white border border-gray-300 rounded-lg shadow-md mt-1 max-h-60 overflow-y-auto">
-                    {startSuggestions.map((suggestion) => (
-                      <li
-                        key={suggestion.place_id}
-                        onClick={() => handleSuggestionClick(suggestion.description, setStartForm, setStartSuggestions)}
-                        className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                      >
-                        {suggestion.description}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
+        </div>
+        <div className="w-full max-w-4xl border border-stone-400 bg-gray-100 shadow-2xl rounded-lg p-8">
+          <div className="relative flex flex-col sm:flex-row sm:gap-4 gap-2 items-center sm:items-start justify-between">
+            {/* Start Location */}
+            <div className="relative w-full sm:w-auto">
+              <input
+                id="startFrom"
+                type="text"
+                value={startFrom}
+                onChange={handleStartForm}
+                placeholder={currentTranslations.placeholders.startLocation}
+                className="w-full sm:w-[10rem] px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+              {startSuggestions.length > 0 && (
+                <ul className="absolute left-0 top-full z-10 w-full bg-white border border-gray-300 rounded-lg shadow-md mt-1 max-h-60 overflow-y-auto">
+                  {startSuggestions.map((suggestion) => (
+                    <li
+                      key={suggestion.place_id}
+                      onClick={() => handleSuggestionClick(suggestion.description, setStartForm, setStartSuggestions)}
+                      className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                    >
+                      {suggestion.description}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
 
-              {/* Destination Location */}
-              <div className="relative flex-1">
-                <input
-                  id="destination"
-                  type="text"
-                  value={endsAt}
-                  onChange={handleEndsAt}
-                  placeholder={currentTranslations.placeholders.destinationLocation}
-                  className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                {destinationSuggestions.length > 0 && (
-                  <ul className="absolute left-0 top-full z-10 w-full bg-white border border-gray-300 rounded-lg shadow-md mt-1 max-h-60 overflow-y-auto">
-                    {destinationSuggestions.map((suggestion) => (
-                      <li
-                        key={suggestion.place_id}
-                        onClick={() => handleSuggestionClick(suggestion.description, setEndsAt, setDestinationSuggestions)}
-                        className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                      >
-                        {suggestion.description}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
+            {/* Destination Location */}
+            <div className="relative w-full sm:w-auto">
+              <input
+                id="destination"
+                type="text"
+                value={endsAt}
+                onChange={handleEndsAt}
+                placeholder={currentTranslations.placeholders.destinationLocation}
+                className="w-full sm:w-[10rem] px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+              {destinationSuggestions.length > 0 && (
+                <ul className="absolute left-0 top-full z-10 w-full bg-white border border-gray-300 rounded-lg shadow-md mt-1 max-h-60 overflow-y-auto">
+                  {destinationSuggestions.map((suggestion) => (
+                    <li
+                      key={suggestion.place_id}
+                      onClick={() => handleSuggestionClick(suggestion.description, setEndsAt, setDestinationSuggestions)}
+                      className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                    >
+                      {suggestion.description}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
 
-              {/* Date-Time Picker */}
+            {/* Date-Time Picker */}
+            <div className="relative w-full sm:w-auto">
               <input
                 type="datetime-local"
-                className="w-[7rem] flex-1 px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full"
+                className="w-full sm:w-[10rem] px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
+            </div>
 
-              {/* Submit Button */}
+            {/* Submit Button */}
+            <div className="w-full sm:w-auto">
               <button
                 type="submit"
                 onClick={() => {
@@ -191,7 +195,7 @@ const App: React.FC = () => {
                   const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
                   window.open(whatsappURL, "_blank"); // Open WhatsApp in a new tab
                 }}
-                className="bg-blue-500 text-white px-6 py-3 rounded-md font-medium shadow-md hover:bg-blue-600 transition duration-300"
+                className="w-full sm:w-auto bg-blue-500 text-white px-6 py-3 rounded-md font-medium shadow-md hover:bg-blue-600 transition duration-300"
               >
                 {language === 'bn' ? 'অনুরোধ করুন' : 'Request Ride'}
               </button>
