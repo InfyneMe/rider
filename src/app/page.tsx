@@ -27,7 +27,7 @@ const App: React.FC = () => {
 
       const data = await response.json();
       if (data.locData && data.locData.predictions) {
-        const newSuggestions = data.locData.predictions.map((prediction: any) => ({
+        const newSuggestions = data.locData.predictions.map((prediction: Suggestion) => ({
           place_id: prediction.place_id,
           description: prediction.description,
         }));
@@ -61,7 +61,17 @@ const App: React.FC = () => {
     suggestionsSetter([]); // Clear suggestions on selection
   };
 
-  const translations: Record<string, any> = {
+  const translations: Record<
+    string,
+    {
+      words: { text: string; className?: string }[];
+      placeholders: {
+        startLocation: string;
+        destinationLocation: string;
+        dateTime: string;
+      };
+    }
+  > = {
     en: {
       words: [
         { text: 'Welcome' },
@@ -88,6 +98,7 @@ const App: React.FC = () => {
     },
   };
 
+
   useEffect(() => {
     const savedLanguage = localStorage.getItem('appLanguage');
     if (savedLanguage) {
@@ -105,7 +116,7 @@ const App: React.FC = () => {
   return (
     <>
       {!language && <LanguagePopup onSelectLanguage={handleLanguageChange} />}
-      <div className="flex flex-col items-center min-h-screen px-4 sm:px-8" style={{ backgroundImage: "url('/map5.jpg')" }}>
+      <div className="flex flex-col items-center min-h-screen px-4 sm:px-8" style={{ backgroundImage: "url('/map4.jpg')" }}>
         <div className="mt-10">
           {language && (
             <TypewriterEffectSmooth
@@ -114,7 +125,7 @@ const App: React.FC = () => {
             />
           )}
           <div className="w-full max-w-4xl border border-stone-400 bg-gray-100 shadow-2xl rounded-lg p-8">
-            <div className="relative flex flex-wrap gap-6 items-center justify-between">
+            <div className="relative flex flex-wrap gap-2 items-center justify-between">
               {/* Start Location */}
               <div className="relative flex-1">
                 <input
@@ -123,7 +134,7 @@ const App: React.FC = () => {
                   value={startFrom}
                   onChange={handleStartForm}
                   placeholder={currentTranslations.placeholders.startLocation}
-                  className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-[10rem] px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
                 {startSuggestions.length > 0 && (
                   <ul className="absolute left-0 top-full z-10 w-full bg-white border border-gray-300 rounded-lg shadow-md mt-1 max-h-60 overflow-y-auto">
@@ -168,12 +179,18 @@ const App: React.FC = () => {
               {/* Date-Time Picker */}
               <input
                 type="datetime-local"
-                className="flex-1 px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full"
+                className="w-[7rem] flex-1 px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full"
               />
 
               {/* Submit Button */}
               <button
                 type="submit"
+                onClick={() => {
+                  const message = `Hi, I want to request a ride from ${startFrom} to ${endsAt}.`;
+                  const phoneNumber = "918099227246"; // Replace with your WhatsApp number (with country code, e.g., 1234567890 for +1 234 567 890).
+                  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                  window.open(whatsappURL, "_blank"); // Open WhatsApp in a new tab
+                }}
                 className="bg-blue-500 text-white px-6 py-3 rounded-md font-medium shadow-md hover:bg-blue-600 transition duration-300"
               >
                 {language === 'bn' ? 'অনুরোধ করুন' : 'Request Ride'}
