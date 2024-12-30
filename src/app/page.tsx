@@ -77,8 +77,8 @@ const App: React.FC = () => {
     bn: {
       words: [
         { text: 'স্বাগতম' },
-        { text: 'আপনার', className: 'text-blue-500 dark:text-blue-500' },
-        { text: 'রাইডার এ।' },
+        { text: 'আপনার' },
+        { text: 'রাইডার এ।', className: 'text-blue-500 dark:text-blue-500' },
       ],
       placeholders: {
         startLocation: 'শুরু স্থান',
@@ -105,7 +105,7 @@ const App: React.FC = () => {
   return (
     <>
       {!language && <LanguagePopup onSelectLanguage={handleLanguageChange} />}
-      <div className="flex flex-col items-center min-h-screen px-4 sm:px-8" style={{ backgroundImage: "url('/map4.jpg')" }}>
+      <div className="flex flex-col items-center min-h-screen px-4 sm:px-8" style={{ backgroundImage: "url('/map5.jpg')" }}>
         <div className="mt-10">
           {language && (
             <TypewriterEffectSmooth
