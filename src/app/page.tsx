@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import LanguagePopup from './Language';
-import { TypewriterEffectSmooth } from '@/components/ui/typewriter-effect';
+// import { TypewriterEffectSmooth } from '@/components/ui/typewriter-effect';
 
 interface Suggestion {
   place_id: string;
@@ -12,6 +12,8 @@ const App: React.FC = () => {
   const [language, setLanguage] = useState<string | null>(null);
   const [startFrom, setStartForm] = useState<string>('');
   const [endsAt, setEndsAt] = useState<string>('');
+  const [dateTime, setDateTime] = useState<string>('');
+
   const [startSuggestions, setStartSuggestions] = useState<Suggestion[]>([]);
   const [destinationSuggestions, setDestinationSuggestions] = useState<Suggestion[]>([]);
 
@@ -116,13 +118,16 @@ const App: React.FC = () => {
   return (
     <>
       {!language && <LanguagePopup onSelectLanguage={handleLanguageChange} />}
-      <div className="flex flex-col items-center min-h-screen px-4 sm:px-8" style={{ backgroundImage: "url('/map4.jpg')" }}>
+      <div className="flex flex-col items-center min-h-screen px-4 sm:px-8" style={{ backgroundImage: "url('/map6.jpg')" }}>
         <div className="mt-10">
           {language && (
-            <TypewriterEffectSmooth
-              words={currentTranslations.words}
-              className="text-center text-3xl font-semibold text-gray-800"
-            />
+            // <TypewriterEffectSmooth
+            //   words={currentTranslations.words}
+            //   className="text-center text-3xl font-semibold text-gray-800"
+            // />
+            <p className="text-center text-3xl font-semibold text-gray-800 my-2 mb-5">স্বাগতম  আপনার  
+              <span className='text-sky-500'> রাইডার এ।</span>
+            </p>
           )}
         </div>
         <div className="w-full max-w-4xl border border-stone-400 bg-gray-100 shadow-2xl rounded-lg p-8">
@@ -181,6 +186,8 @@ const App: React.FC = () => {
             <div className="relative w-full sm:w-auto">
               <input
                 type="datetime-local"
+                value={dateTime}
+                onChange={(e) => setDateTime(e.target.value)}
                 className="w-full sm:w-[10rem] px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
@@ -190,7 +197,8 @@ const App: React.FC = () => {
               <button
                 type="submit"
                 onClick={() => {
-                  const message = `Hi, I want to request a ride from ${startFrom} to ${endsAt}.`;
+                  const formatDate = new Date(dateTime).toLocaleDateString();
+                  const message = `Hi, I want to request a ride from ${startFrom} to ${endsAt} On ${formatDate}`;
                   const phoneNumber = "918099227246"; // Replace with your WhatsApp number (with country code, e.g., 1234567890 for +1 234 567 890).
                   const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
                   window.open(whatsappURL, "_blank"); // Open WhatsApp in a new tab
