@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react';
 import LanguagePopup from './Language';
 import { TypewriterEffectSmooth } from '@/components/ui/typewriter-effect';
+import AdSense from '@/components/AdSense';
+
 
 interface Suggestion {
   place_id: string;
@@ -14,7 +16,6 @@ const App: React.FC = () => {
   const [endsAt, setEndsAt] = useState<string>('');
   const [dateTime, setDateTime] = useState<string>('');
   const [vehicleType, setVehicleType] = useState<string>('Auto'); // New state for selected vehicle type
-
   const [startSuggestions, setStartSuggestions] = useState<Suggestion[]>([]);
   const [destinationSuggestions, setDestinationSuggestions] = useState<Suggestion[]>([]);
 
@@ -132,7 +133,6 @@ const App: React.FC = () => {
   };
 
   const currentTranslations = translations[language || 'en'];
-
   return (
     <>
       {!language && <LanguagePopup onSelectLanguage={handleLanguageChange} />}
@@ -244,6 +244,7 @@ const App: React.FC = () => {
 
           </div>
         </div>
+        <AdSense />
       </div>
     </>
   );
